@@ -1,24 +1,30 @@
 import "./App.css";
-import { useGetPostsQuery } from "./redux/api";
+import { useGetPostsQuery, useNewPostMutation } from "./redux/api";
 import PostCard from "./components/PostCard";
 import { useState } from "react";
 
 function App() {
   const { isLoading, data } = useGetPostsQuery();
   let products = data?.products;
-  // console.log("products", products);
+  
 
+  const [newPost]=useNewPostMutation()
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  function handleClick(e){
-    e.preventDefault()
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(name, description, price);
+   
 
-    console.log(name,description,price)
-    setName("")
-    setDescription("")
-    setPrice("")
+    const product={
+      name,description,price
+    }
+    newPost(product)
+     setName("");
+     setDescription("");
+     setPrice("");
   }
   return (
     <div className="flex flex-col justify-center gap-4 items-center mt-4">
@@ -46,14 +52,17 @@ function App() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-        <button className="bg-green-300 p-2 px-4 rounded-md" onClick={handleClick}>
+        <button
+          className="bg-green-300 p-2 px-4 rounded-md"
+          onClick={handleClick}
+        >
           Add Product
         </button>
       </form>
       <div className="app flex flex-wrap gap-4 mx-20 my-8">
         {products?.map((ele, index) => (
-          <div className="postcard ">
-            <PostCard key={ele.id} data={ele}></PostCard>
+          <div key={ele.id}  className="postcard ">
+            <PostCard data={ele}></PostCard>
           </div>
         ))}
       </div>
