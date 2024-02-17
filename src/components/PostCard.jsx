@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PostCard = ({data}) => {
-console.log("element",data)
+// console.log("element",data)
 const {title,description,price,rating,thumbnail}=data
 // description = description.split(" ").splice(0, 20).join(" ");
   return (
