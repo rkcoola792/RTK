@@ -1,6 +1,9 @@
 import React from 'react'
 
 const NewPostCard = (props) => {
+  
+
+            
   return (
     <div className="w-[260px] h-[360px] bg-slate-100 rounded-md">
       <img className='rounded-md'
